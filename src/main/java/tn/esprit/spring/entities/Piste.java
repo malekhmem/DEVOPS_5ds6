@@ -2,8 +2,10 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +31,6 @@ public class Piste implements Serializable {
 	int slope;
 
 	@ManyToMany(mappedBy= "pistes")
-	transient Set<Skier> skiers;  // Marked as transient to prevent serialization
+	Set<Skier> skiers;
+	
 }
