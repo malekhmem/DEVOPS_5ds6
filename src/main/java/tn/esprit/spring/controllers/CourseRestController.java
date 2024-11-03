@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entities.*;
 import tn.esprit.spring.repositories.IRegistrationRepository;
 import tn.esprit.spring.services.ICourseServices;
-import tn.esprit.spring.services.IRegistrationServices;
 
 import java.util.Date;
 import java.util.List;
@@ -78,16 +77,13 @@ public class CourseRestController {
         try {
             course.setTypeCourse(TypeCourse.valueOf(courseDTO.getTypeCourse().toUpperCase()));
         } catch (IllegalArgumentException | NullPointerException e) {
-            // Log the error and/or set a default value if desired
-            // Example: Setting a default value if conversion fails
-            course.setTypeCourse(TypeCourse.INDIVIDUAL);  // or any other default
+            course.setTypeCourse(TypeCourse.INDIVIDUAL); // or any other default
         }
 
         try {
             course.setSupport(Support.valueOf(courseDTO.getSupport().toUpperCase()));
         } catch (IllegalArgumentException | NullPointerException e) {
-            // Log the error and/or set a default value if desired
-            course.setSupport(Support.SKI);  // or any other default
+            course.setSupport(Support.SKI); // or any other default
         }
 
         course.setPrice(courseDTO.getPrice());
@@ -96,25 +92,30 @@ public class CourseRestController {
         return course;
     }
 
-
     @Operation(description = "Add Course and Assign To Registration")
     @PutMapping("/addAndAssignToRegistration/{numRegistration}")
-    public Course addAndAssignToCourse(@RequestBody Course course, @PathVariable("numRegistration") Long numRegistration) {
-        return courseServices.addCourseAndAssignToregistre(course, numRegistration);
+    public CourseDTO addAndAssignToCourse(@RequestBody CourseDTO courseDTO, @PathVariable("numRegistration") Long numRegistration) {
+        Course course = convertToEntity(courseDTO);
+        Course savedCourse = courseServices.addCourseAndAssignToregistre(course, numRegistration);
+        return convertToDTO(savedCourse);
     }
 
     @PostMapping("/course/{registrationId}/assign")
-    public ResponseEntity<Course> addCourseAndAssignToRegistration(@RequestBody Course course, @PathVariable("registrationId") Long numRegistration) {
+    public ResponseEntity<CourseDTO> addCourseAndAssignToRegistration(@RequestBody CourseDTO courseDTO, @PathVariable("registrationId") Long numRegistration) {
+        Course course = convertToEntity(courseDTO);
         Course savedCourse = courseServices.addCourseAndAssignToregistre(course, numRegistration);
-        return ResponseEntity.ok(savedCourse);
+        return ResponseEntity.ok(convertToDTO(savedCourse));
     }
 
     // New Advanced Methods
 
     @Operation(description = "Filter Courses by Type")
     @GetMapping("/filterByType/{typeCourse}")
-    public List<Course> filterCoursesByType(@PathVariable("typeCourse") TypeCourse typeCourse) {
-        return courseServices.filterCoursesByType(typeCourse);
+    public List<CourseDTO> filterCoursesByType(@PathVariable("typeCourse") TypeCourse typeCourse) {
+        return courseServices.filterCoursesByType(typeCourse)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Operation(description = "Remove Course from Registration")
@@ -128,15 +129,10 @@ public class CourseRestController {
     @GetMapping("/isCourseAssigned/{numCourse}/{numRegistration}")
     public ResponseEntity<Boolean> isCourseAlreadyAssigned(@PathVariable("numCourse") Long numCourse, @PathVariable("numRegistration") Long numRegistration) {
         Course course = courseServices.retrieveCourse(numCourse);
-        Registration registration = registrationRepository.findById(numRegistration).orElse(null); // Assuming registration repository is accessible
+        Registration registration = registrationRepository.findById(numRegistration).orElse(null);
         boolean isAssigned = courseServices.isCourseAlreadyAssigned(course, registration);
         return ResponseEntity.ok(isAssigned);
     }
-
-
-
-
-
 
     // ================================ FINANCIAL ANALYSIS ==================================
 
