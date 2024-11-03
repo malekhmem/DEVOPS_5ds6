@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:17
+ADD http://192.168.136.137:8081/repository/maven-releases/tn/esprit/spring/gestion-station-ski/1.0/gestion-station-ski-1.0.jar /app/app.jar
 EXPOSE 8089
-ADD target/gestion-station-ski-1.0.jar gestion-station-ski-1.0.jar
-ENTRYPOINT ["java","-jar","/gestion-station-ski-1.0.jar"]
+CMD ["java","-jar","/app/app.jar"]
