@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/malekhmem/DEVOPS_5ds6.git' // 
+        GIT_BRANCH = 'Salma_Ridene'
+    }
+
+    stages {
+        stage('Cloner le dépôt') {
+            steps {
+                git branch: "${GIT_BRANCH}", url: "${GIT_REPO}"
+            }
+        }
+
+        stage('Compiler le projet') {
+            steps {
+                script {
+                    // Utilisez la commande de build appropriée selon le type de projet.
+
+                    sh 'mvn compile'
+
+
+            }
+        }
+
+        stage('Construire le projet') {
+            steps {
+                script {
+:
+                    sh 'mvn package'
+*
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline exécuté avec succès!'
+        }
+        failure {
+            echo 'Le pipeline a échoué.'
+        }
+    }
+}
