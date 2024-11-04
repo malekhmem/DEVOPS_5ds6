@@ -35,5 +35,5 @@ public class Registration implements Serializable {
     Skier skier;
 	@JsonIgnore
 	@ManyToOne
-	Course course;
+	private Course course;
 }
