@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(SubscriptionRestController.class)
-public class SubscriptionRestControllerTest {
+ class SubscriptionRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,7 +30,7 @@ public class SubscriptionRestControllerTest {
     private ISubscriptionServices subscriptionServices;
 
     @Test
-    public void testAddSubscription() throws Exception {
+     void testAddSubscription() throws Exception {
         // Arrange
         Subscription subscription = new Subscription(1L, LocalDate.now(), LocalDate.now().plusMonths(1), 100.0f, TypeSubscription.ANNUAL);
         given(subscriptionServices.addSubscription(Mockito.any(Subscription.class))).willReturn(subscription);
@@ -48,7 +48,7 @@ public class SubscriptionRestControllerTest {
     }
 
     @Test
-    public void testGetSubscriptionById() throws Exception {
+     void testGetSubscriptionById() throws Exception {
         // Arrange
         Long id = 1L;
         Subscription subscription = new Subscription(id, LocalDate.now(), LocalDate.now().plusMonths(1), 100.0f, TypeSubscription.MONTHLY);

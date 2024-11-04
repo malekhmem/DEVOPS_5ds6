@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SubscriptionServiceTest {
+ class SubscriptionServiceTest {
 
     @Mock
     private ISubscriptionRepository subscriptionRepository;
@@ -29,7 +29,7 @@ public class SubscriptionServiceTest {
     }
 
     @Test
-    public void testAddSubscription() {
+     void testAddSubscription() {
         // Arrange
         Subscription subscription = new Subscription(1L, LocalDate.now(), LocalDate.now().plusMonths(1), 50.0f, TypeSubscription.MONTHLY);
         when(subscriptionRepository.save(subscription)).thenReturn(subscription);
@@ -44,7 +44,7 @@ public class SubscriptionServiceTest {
     }
 
     @Test
-    public void testRetrieveSubscriptionById() {
+     void testRetrieveSubscriptionById() {
         // Arrange
         Long id = 1L;
         Subscription subscription = new Subscription(id, LocalDate.now(), LocalDate.now().plusMonths(1), 100.0f, TypeSubscription.ANNUAL);
@@ -59,7 +59,7 @@ public class SubscriptionServiceTest {
     }
 
     @Test
-    public void testShowMonthlyRecurringRevenue() {
+     void testShowMonthlyRecurringRevenue() {
         // Test Case 1: When recurring revenue is null
         when(subscriptionRepository.recurringRevenueByTypeSubEquals(TypeSubscription.MONTHLY)).thenReturn(null);
 
