@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.spring.entities.Instructor;
 import tn.esprit.spring.repositories.IInstructorRepository;
-import tn.esprit.spring.services.IInstructorServices;
 import tn.esprit.spring.services.InstructorServicesImpl;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import java.util.Optional;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class InstructorServiceTest {
+ class InstructorServiceTest {
     @Mock
     private IInstructorRepository instructorRepository;
     Instructor ins = Instructor.builder().firstName("foulen").build();

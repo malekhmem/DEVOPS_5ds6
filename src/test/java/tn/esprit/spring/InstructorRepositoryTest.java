@@ -12,20 +12,19 @@ import tn.esprit.spring.repositories.IInstructorRepository;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class InstructorRepositoryTest {
+ class InstructorRepositoryTest {
     @Autowired
     IInstructorRepository instructorRepository;
     static Instructor i = Instructor.builder().firstName("foulen").courses(new HashSet<>()).build();
 
     @Test
     @Order(1)
-    public void ajouterInstructor(){
+     void ajouterInstructor(){
         i = instructorRepository.save(i);
         log.info("id :"+i.getNumInstructor());
         log.info("ajout ==> "+ i.toString());
@@ -36,7 +35,7 @@ public class InstructorRepositoryTest {
 
     @Test
     @Order(2)
-    public void modifierInstructor(){
+     void modifierInstructor(){
         log.info("id :"+i.getNumInstructor());
         i.setFirstName("modif_foulen");
         i = instructorRepository.save(i);
@@ -47,7 +46,7 @@ public class InstructorRepositoryTest {
 
     @Test
     @Order(3)
-    public void trouverInstructor(){
+     void trouverInstructor(){
         List<Instructor> instructors = new ArrayList<>();
         instructorRepository.findAll().forEach(instructors::add);
         log.info("find all ==> " + instructors.size());
@@ -56,7 +55,7 @@ public class InstructorRepositoryTest {
 
     @Test
     @Order(4)
-    public void chercherInstructor(){
+     void chercherInstructor(){
         log.info("Chercher ==> " + i.getNumInstructor());
         Instructor instructor = new Instructor();
         instructor = instructorRepository.findById(i.getNumInstructor()).get();
@@ -66,7 +65,7 @@ public class InstructorRepositoryTest {
 
     @Test
     @Order(5)
-    public void count(){
+     void count(){
         long x = instructorRepository.count();
         log.info("count ==> " + x);
         Assertions.assertEquals(x, instructorRepository.findAll().size());
@@ -74,7 +73,7 @@ public class InstructorRepositoryTest {
 
     @Test
     @Order(6)
-    public void supprimerInstructor(){
+     void supprimerInstructor(){
         instructorRepository.deleteById(i.getNumInstructor());
         Instructor ins = instructorRepository.findById(i.getNumInstructor()).orElse(null);
         Assertions.assertNull(ins);
