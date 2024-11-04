@@ -37,7 +37,7 @@ import java.util.Optional;
         Instructor instr = instructorServices.addInstructor(ins);
         Assertions.assertSame(instr, ins);
         log.info("After : " + ins.getNumInstructor());
-        Mockito.verify(instructorRepository).save(ins);;
+        Mockito.verify(instructorRepository).save(ins);
     }
 
     @Test
