@@ -57,7 +57,7 @@ import java.util.List;
     @Order(4)
      void chercherInstructor(){
         log.info("Chercher ==> " + i.getNumInstructor());
-        Instructor instructor = new Instructor();
+        Instructor instructor ;
         instructor = instructorRepository.findById(i.getNumInstructor()).get();
         Assertions.assertEquals(instructor.getNumInstructor(),i.getNumInstructor());
     }
