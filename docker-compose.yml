@@ -15,7 +15,7 @@ services:
   app-timesheet:
     depends_on:
       - mysqldb
-    image: fares258/tpski-app:1.0.0
+    image: fares258/tp-ski:latest
     restart: on-failure
     ports:
       - 8089:8089

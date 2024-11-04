@@ -46,7 +46,17 @@ public class Skier implements Serializable {
 	@OneToMany(mappedBy = "skier")
 	Set<Registration> registrations;
 
-
+	@Override
+	public String toString() {
+		return "Skier{" +
+				"numSkier=" + numSkier +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", dateOfBirth=" + dateOfBirth +
+				", city='" + city + '\'' +
+				", subscription=" + subscription +
+				'}';
+	}
 
 
 
