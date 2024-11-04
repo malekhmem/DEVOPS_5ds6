@@ -40,12 +40,9 @@ public class RegistrationServicesImpl implements  IRegistrationServices{
     @Transactional
     @Override
     public Registration addRegistrationAndAssignToSkierAndCourse(Registration registration, Long numSkieur, Long numCours) {
-        Skier skier = skierRepository.findById(numSkieur).orElse(null);
-        Course course = courseRepository.findById(numCours).orElse(null);
+        Skier skier = skierRepository.findById(numSkieur).orElse(new Skier());
+        Course course = courseRepository.findById(numCours).orElse(new Course());
 
-        if (skier == null || course == null) {
-            return null;
-        }
 
         if(registrationRepository.countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse(registration.getNumWeek(), skier.getNumSkier(), course.getNumCourse()) >=1){
             log.info("Sorry, you're already register to this course of the week :" + registration.getNumWeek());
