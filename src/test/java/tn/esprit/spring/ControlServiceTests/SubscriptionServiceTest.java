@@ -60,13 +60,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
     @Test
      void testShowMonthlyRecurringRevenue() {
-        // Test Case 1: When recurring revenue is null
+        // Test Case 1:  recurring revenue  null
         when(subscriptionRepository.recurringRevenueByTypeSubEquals(TypeSubscription.MONTHLY)).thenReturn(null);
 
         Float recurringRevenue = subscriptionServiceImpl.showMonthlyRecurringRevenue();
         assertEquals(0.0f, recurringRevenue, "Recurring revenue should be 0.0 when repository returns null");
 
-        // Test Case 2: When recurring revenue is non-null
+        // Test Case 2: recurring revenue is non-null
         when(subscriptionRepository.recurringRevenueByTypeSubEquals(TypeSubscription.MONTHLY)).thenReturn(200.0f);
 
         recurringRevenue = subscriptionServiceImpl.showMonthlyRecurringRevenue();
