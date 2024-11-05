@@ -20,7 +20,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Course implements Serializable {
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
