@@ -14,7 +14,7 @@ services:
       - backend-network
 
   spring:
-    image: nesrynea2/app.jar:1.1.0
+    image: nesrynea2/app.jar:2.0
     ports:
       - "8089:8089"
     environment:
