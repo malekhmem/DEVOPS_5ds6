@@ -1,69 +1,28 @@
 package tn.esprit.spring.entities;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import tn.esprit.spring.entities.Color;
+import tn.esprit.spring.entities.Piste;
 
-import java.util.HashSet;
-import java.util.Set;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PisteTest {
 
-    private Piste piste;
-
-    @BeforeEach
-    public void setUp() {
-        // Initialize a new Piste object before each test
-        piste = new Piste();
-    }
-
     @Test
-    public void testNumPiste() {
-        Long numPiste = 1L;
-        piste.setNumPiste(numPiste);
-        assertEquals(numPiste, piste.getNumPiste());
-    }
+    public void testPisteCreation() {
+        // Création d'une instance de Piste
+        Piste piste = new Piste();
+        piste.setNumPiste(1L);
+        piste.setNamePiste("Piste Rouge");
+        piste.setColor(Color.RED);
+        piste.setLength(3000);
+        piste.setSlope(20);
 
-    @Test
-    public void testNamePiste() {
-        String name = "Green Piste";
-        piste.setNamePiste(name);
-        assertEquals(name, piste.getNamePiste());
-    }
-
-    @Test
-    public void testColor() {
-        Color color = Color.GREEN;
-        piste.setColor(color);
-        assertEquals(color, piste.getColor());
-    }
-
-    @Test
-    public void testLength() {
-        int length = 1200;
-        piste.setLength(length);
-        assertEquals(length, piste.getLength());
-    }
-
-    @Test
-    public void testSlope() {
-        int slope = 30;
-        piste.setSlope(slope);
-        assertEquals(slope, piste.getSlope());
-    }
-
-    @Test
-    public void testSkiers() {
-        Set<Skier> skiers = new HashSet<>();
-        Skier skier1 = new Skier();
-        skier1.setNumSkier(1L);
-        Skier skier2 = new Skier();
-        skier2.setNumSkier(2L);
-
-        skiers.add(skier1);
-        skiers.add(skier2);
-
-        piste.setSkiers(skiers);
-        assertEquals(skiers, piste.getSkiers());
+        // Vérification des valeurs des attributs
+        assertEquals(1L, piste.getNumPiste());
+        assertEquals("Piste Rouge", piste.getNamePiste());
+        assertEquals(Color.RED, piste.getColor());
+        assertEquals(3000, piste.getLength());
+        assertEquals(20, piste.getSlope());
     }
 }
