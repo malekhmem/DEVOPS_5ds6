@@ -21,6 +21,8 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class Course implements Serializable {
 
+
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
